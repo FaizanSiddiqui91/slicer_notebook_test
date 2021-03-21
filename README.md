@@ -10,8 +10,6 @@ All the notebooks can be run interactively in the web browser via Binder by clic
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FaizanSiddiqui91/slicer_notebook_test.git/HEAD?filepath=UncertainViz.ipynb)
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FaizanSiddiqui91/slicer_notebook_test.git/HEAD?urlpath=Test_notebook_m.ipynb)
-
 ## Running locally using docker
 
 Download or clone this repository to your local computer.
