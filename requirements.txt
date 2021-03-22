@@ -1,3 +1,9 @@
 voila
+fastai>=2
+pillow
+packaging
 ipywidgets==7.5.1
-pytessract==0.3.6
+pytesseract==0.3.6
+tesseract-ocr
+transformers==3.2.0
+googledrivedownloader
