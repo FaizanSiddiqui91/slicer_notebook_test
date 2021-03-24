@@ -47,10 +47,7 @@ ARG SLICER_DOWNLOAD_URL=http://slicer.kitware.com/midas3/api/rest?method=midas.b
 #ADD $SLICER_ARCHIVE.tar.gz ${HOME}/
 
 # Download package:
-RUN curl -OJL "$SLICER_DOWNLOAD_URL" && \
-    tar xzf $SLICER_ARCHIVE.tar.gz && \
-    rm $SLICER_ARCHIVE.tar.gz && \
-    mv $SLICER_ARCHIVE Slicer
+
 
 ################################################################################
 # these go after installs to avoid trivial invalidation
