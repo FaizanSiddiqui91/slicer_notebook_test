@@ -59,61 +59,7 @@ ENV DISPLAY=:10
 
 # Prevent git error:
 #   fatal: unable to access 'https://github.com/novnc/websockify/': server certificate verification failed. CAfile: none CRLfile: none
-RUN apt-get -y -q install git && \
-    apt-get install --reinstall ca-certificates
 
-################################################################################
-# Set up remote desktop access - step 1/2
-
-# Build rebind.so (required by websockify)
-RUN set -x && \
-    apt-get install -y build-essential --no-install-recommends && \
-    mkdir src && \
-    cd src && \
-    git clone https://github.com/novnc/websockify websockify && \
-    cd websockify && \
-    make && \
-    cp rebind.so /usr/lib/ && \
-    cd .. && \
-    rm -rf websockify && \
-    cd .. && \
-    rmdir src && \
-    apt-get purge -y --auto-remove build-essential
-
-# Set up launcher for websockify
-# (websockify must run in  Slicer's Python environment)
-COPY websockify ./Slicer/bin/
-RUN chmod +x ${HOME}/Slicer/bin/websockify
-
-################################################################################
-# Need to run Slicer as non-root because
-# - mybinder requirement
-# - chrome sandbox inside QtWebEngine does not support root.
-RUN chown ${NB_USER} ${HOME} ${HOME}/Slicer
-USER ${NB_USER}
-
-RUN mkdir /tmp/runtime-sliceruser
-ENV XDG_RUNTIME_DIR=/tmp/runtime-sliceruser
-
-################################################################################
-# Set up remote desktop access - step 2/2
-
-# Install websockify
-# Copy rebind.so into websockify folder so websockify can find it
-# Install Jupyter desktop (configures noVNC connection adds a new "Desktop" option in New menu in Jupyter)
-
-# First upgrade pip
-RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade pip
-
-# Now install websockify and jupyter-server-proxy (fixed at tag v1.6.0)
-RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify && \
-    cp /usr/lib/rebind.so /home/sliceruser/Slicer/lib/Python/lib/python3.6/site-packages/websockify/ && \
-    /home/sliceruser/Slicer/bin/PythonSlicer -m pip install -e \
-        git+https://github.com/lassoan/jupyter-desktop-server#egg=jupyter-desktop-server \
-        git+https://github.com/jupyterhub/jupyter-server-proxy@v1.6.0#egg=jupyter-server-proxy
-
-################################################################################
-# Install Slicer extensions
 
 COPY start-xorg.sh .
 COPY install.sh .
