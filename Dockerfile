@@ -23,29 +23,6 @@ FROM debian:bullseye-20200422-slim
 ################################################################################
 
 ################################################################################
-# get packages
-# - update
-# - install things
-#   - basic  tools
-#   - slicer dependencies
-#   - awesome window manager
-RUN apt-get install -q -y \
- vim net-tools curl \
- libgl1-mesa-glx \
- xserver-xorg-video-dummy \
- libxrender1 \
- libpulse0 \
- libpulse-mainloop-glib0  \
- libnss3  \
- libxcomposite1 \
- libxcursor1 \
- libfontconfig1 \
- libxrandr2 \
- libasound2 \
- libglu1 \
- x11vnc \
- awesome \
- jq
 
 ################################################################################
 # set up user
