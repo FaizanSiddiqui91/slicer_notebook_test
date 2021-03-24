@@ -62,9 +62,8 @@ ENV DISPLAY=:10
 
 
 
-COPY install.sh .
-RUN ./install.sh ${HOME}/Slicer/Slicer && \
-    rm ${HOME}/install.sh
+
+
 
 ################################################################################
 EXPOSE $VNCPORT $JUPYTERPORT
