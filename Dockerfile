@@ -40,25 +40,13 @@ RUN adduser --disabled-password \
 ################################################################################
 # Download and unpack Slicer
 
-ARG SLICER_ARCHIVE=Slicer-4.13.0-2020-12-20-linux-amd64
-ARG SLICER_DOWNLOAD_URL=http://slicer.kitware.com/midas3/api/rest?method=midas.bitstream.download&name=Slicer-4.13.0-2020-12-20-linux-amd64.tar.gz&checksum=eeb9ba596f3d5ff20265e7d9de9392fe
-
-# Use local package:
-#ADD $SLICER_ARCHIVE.tar.gz ${HOME}/
-
-# Download package:
-
 
 ################################################################################
 # these go after installs to avoid trivial invalidation
 ENV VNCPORT=49053
-#ENV JUPYTERPORT=8888
+ENV JUPYTERPORT=8888
 ENV DISPLAY=:10
 
-
-
-# Prevent git error:
-#   fatal: unable to access 'https://github.com/novnc/websockify/': server certificate verification failed. CAfile: none CRLfile: none
 
 
 
@@ -67,8 +55,8 @@ ENV DISPLAY=:10
 
 ################################################################################
 EXPOSE $VNCPORT 
-ENTRYPOINT ["/home/sliceruser/run.sh"]
-
+#ENTRYPOINT ["/home/sliceruser/run.sh"]
+ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
 #CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser"]
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 
