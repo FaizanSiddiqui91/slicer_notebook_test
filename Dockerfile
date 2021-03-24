@@ -55,7 +55,7 @@ ENV VNCPORT=49053
 ENV JUPYTERPORT=8888
 ENV DISPLAY=:10
 
-COPY xorg.conf .
+
 
 # Prevent git error:
 #   fatal: unable to access 'https://github.com/novnc/websockify/': server certificate verification failed. CAfile: none CRLfile: none
