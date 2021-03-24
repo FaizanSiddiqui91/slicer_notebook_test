@@ -66,7 +66,7 @@ ENV DISPLAY=:10
 
 
 ################################################################################
-EXPOSE $VNCPORT $JUPYTERPORT.
+EXPOSE $VNCPORT 
 ENTRYPOINT ["/home/sliceruser/run.sh"]
 
 #CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser"]
