@@ -1,23 +1,26 @@
+FROM lassoan/slicer-notebook:2020-05-15-89b6bb5
+COPY --chown=sliceruser . ${HOME}/nb
+WORKDIR ${HOME}/nb
+
+
+################################################################################
+# launch jupyter
+# Prevent apt-get from prompting for keyboard choice
+#  https://superuser.com/questions/1356914/how-to-install-xserver-xorg-in-unattended-mode
+
+
+
+
+
 FROM debian:bullseye-20200422-slim
 
 ################################################################################
-# Prevent apt-get from prompting for keyboard choice
-#  https://superuser.com/questions/1356914/how-to-install-xserver-xorg-in-unattended-mode
-ENV DEBIAN_FRONTEND=noninteractive
+
 
 ################################################################################
-# Remove documentation to save hard drive space
-#  https://askubuntu.com/questions/129566/remove-documentation-to-save-hard-drive-space
-COPY etc/dpkg/dpkg.cfg.d/01_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
+
 
 ################################################################################
-# - update apt, set up certs, run netselect to get fast mirror
-# - reduce apt gravity
-# - and disable caching
-#   from https://blog.sleeplessbeastie.eu/2017/10/02/how-to-disable-the-apt-cache/
-RUN echo 'APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;' >> /etc/apt/apt.conf && \
-    echo 'Dir::Cache::pkgcache "";\nDir::Cache::srcpkgcache "";' | tee /etc/apt/apt.conf.d/00_disable-cache-files && \
-    apt-get update -q -y
 
 ################################################################################
 # get packages
@@ -55,7 +58,7 @@ RUN adduser --disabled-password \
             --uid ${NB_UID} \
             ${NB_USER}
 
-WORKDIR ${HOME}
+
 
 ################################################################################
 # Download and unpack Slicer
