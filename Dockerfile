@@ -61,7 +61,7 @@ ENV DISPLAY=:10
 #   fatal: unable to access 'https://github.com/novnc/websockify/': server certificate verification failed. CAfile: none CRLfile: none
 
 
-COPY start-xorg.sh .
+
 COPY install.sh .
 RUN ./install.sh ${HOME}/Slicer/Slicer && \
     rm ${HOME}/install.sh
