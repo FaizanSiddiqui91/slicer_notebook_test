@@ -52,7 +52,7 @@ ARG SLICER_DOWNLOAD_URL=http://slicer.kitware.com/midas3/api/rest?method=midas.b
 ################################################################################
 # these go after installs to avoid trivial invalidation
 ENV VNCPORT=49053
-ENV JUPYTERPORT=8888
+#ENV JUPYTERPORT=8888
 ENV DISPLAY=:10
 
 
@@ -69,7 +69,8 @@ ENV DISPLAY=:10
 EXPOSE $VNCPORT $JUPYTERPORT.
 ENTRYPOINT ["/home/sliceruser/run.sh"]
 
-CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
+#CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 
 ################################################################################
 # Install Slicer application startup script
