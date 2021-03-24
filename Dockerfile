@@ -75,7 +75,7 @@ CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 ################################################################################
 # Install Slicer application startup script
 
-COPY .slicerrc.py .
+#COPY .slicerrc.py .
 
 ################################################################################
 # Build-time metadata as defined at http://label-schema.org
