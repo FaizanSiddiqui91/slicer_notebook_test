@@ -145,7 +145,7 @@ COPY install.sh .
 
 ################################################################################
 EXPOSE $VNCPORT $JUPYTERPORT
-#COPY run.sh .
+COPY run.sh .
 #ENTRYPOINT ["/home/sliceruser/run.sh"]
 
 #CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
@@ -163,11 +163,13 @@ WORKDIR ${HOME}/nb
 ################################################################################
 # launch jupyter
 
-ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
+#ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
+ENTRYPOINT ["/home/sliceruser/run.sh"]
 # NOTE: this is only the *default* command. In mybinder, ENTRYPOINT will be
 #       called with a custom version of this to set port, token etc.
 #       * --ip='' is to avoid bind erorrs inside container
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
+#CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
+CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
 
 
 ################################################################################
