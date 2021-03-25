@@ -148,13 +148,13 @@ EXPOSE $VNCPORT $JUPYTERPORT
 COPY run.sh .
 ENTRYPOINT ["/home/sliceruser/run.sh"]
 
-CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
+#CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
 
 #ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
 # NOTE: this is only the *default* command. In mybinder, ENTRYPOINT will be
 #       called with a custom version of this to set port, token etc.
 #       * --ip='' is to avoid bind erorrs inside container
-#CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 
 #FROM lassoan/slicer-notebook:2020-05-15-89b6bb5
 #COPY --chown=sliceruser . ${HOME}/nb
@@ -177,13 +177,13 @@ CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERP
 
 ################################################################################
 # Build-time metadata as defined at http://label-schema.org
-#ARG BUILD_DATE
-#ARG IMAGE
-#ARG VCS_REF
-#ARG VCS_URL
-#LABEL org.label-schema.build-date=$BUILD_DATE \
-#      org.label-schema.name=$IMAGE \
-#      org.label-schema.vcs-ref=$VCS_REF \
+ARG BUILD_DATE
+ARG IMAGE
+ARG VCS_REF
+ARG VCS_URL
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name=$IMAGE \
+      org.label-schema.vcs-ref=$VCS_REF \
 
-#      org.label-schema.vcs-url=$VCS_URL \
- #     org.label-schema.schema-version="1.0"
+      org.label-schema.vcs-url=$VCS_URL \
+      org.label-schema.schema-version="1.0"
