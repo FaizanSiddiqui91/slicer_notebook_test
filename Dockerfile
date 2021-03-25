@@ -140,15 +140,21 @@ RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify
 
 COPY start-xorg.sh .
 COPY install.sh .
-RUN ./install.sh ${HOME}/Slicer/Slicer && \
-    rm ${HOME}/install.sh
+#RUN ./install.sh ${HOME}/Slicer/Slicer && \
+#    rm ${HOME}/install.sh
 
 ################################################################################
 EXPOSE $VNCPORT $JUPYTERPORT
 COPY run.sh .
-ENTRYPOINT ["/home/sliceruser/run.sh"]
+#ENTRYPOINT ["/home/sliceruser/run.sh"]
 
-CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
+#CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
+
+ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
+# NOTE: this is only the *default* command. In mybinder, ENTRYPOINT will be
+#       called with a custom version of this to set port, token etc.
+#       * --ip='' is to avoid bind erorrs inside container
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 
 ################################################################################
 # Install Slicer application startup script
