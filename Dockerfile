@@ -159,16 +159,17 @@ CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
 ################################################################################
 # Install Slicer application startup script
 
-COPY .slicerrc.py .
+#COPY .slicerrc.py .
 
 ################################################################################
 # Build-time metadata as defined at http://label-schema.org
-ARG BUILD_DATE
-ARG IMAGE
-ARG VCS_REF
-ARG VCS_URL
-LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name=$IMAGE \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url=$VCS_URL \
-      org.label-schema.schema-version="1.0"
+#ARG BUILD_DATE
+#ARG IMAGE
+#ARG VCS_REF
+#ARG VCS_URL
+#LABEL org.label-schema.build-date=$BUILD_DATE \
+#      org.label-schema.name=$IMAGE \
+#      org.label-schema.vcs-ref=$VCS_REF \
+
+#      org.label-schema.vcs-url=$VCS_URL \
+ #     org.label-schema.schema-version="1.0"
