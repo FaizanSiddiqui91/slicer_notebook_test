@@ -1,5 +1,6 @@
 channels:
   - conda-forge
+  - voila
 dependencies:
   - appmode
   - voila
