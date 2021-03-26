@@ -136,39 +136,8 @@ RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify
         git+https://github.com/jupyterhub/jupyter-server-proxy@v1.6.0#egg=jupyter-server-proxy
 
 ################################################################################
-# Install Slicer extensions app mode
-##########################################################################
-RUN export DEBIAN_FRONTEND="noninteractive" \
-  && apt-get update && apt-get install -y --no-install-recommends \
-    python3-setuptools     \
-    python3-wheel          \
-    python3-pip            \
-    less                  \
-    nano                  \
-    sudo                  \
-    git                   \
-    npm                   \
-  && rm -rf /var/lib/apt/lists/*
+# Install Slicer extensions
 
-# install Jupyter from git
-# WORKDIR /opt/notebook/
-# RUN git clone https://github.com/jupyter/notebook.git . && pip3 install .
-
-# install Jupyter via pip
-RUN pip3 install notebook
-
-# install ipywidgets
-RUN pip3 install ipywidgets  && \
-    jupyter nbextension enable --sys-prefix --py widgetsnbextension
-
-# install Appmode
-COPY . /opt/appmode
-WORKDIR /opt/appmode/
-RUN pip3 install .                                           && \
-    jupyter nbextension     enable --py --sys-prefix appmode && \
-    jupyter serverextension enable --py --sys-prefix appmode
-
-#########################################################################
 COPY start-xorg.sh .
 COPY install.sh .
 #RUN ./install.sh ${HOME}/Slicer/Slicer && \
@@ -178,10 +147,7 @@ COPY install.sh .
 EXPOSE $VNCPORT $JUPYTERPORT
 COPY run.sh .
 #ENTRYPOINT ["/home/sliceruser/run.sh"]
-######################################
 
-
-############
 #CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERPORT --ip=0.0.0.0 --no-browser"]
 
 #ENTRYPOINT ["sh", "/home/sliceruser/nb/start"]
