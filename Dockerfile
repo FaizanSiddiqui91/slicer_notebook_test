@@ -140,7 +140,12 @@ RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify
 
 #EOF
 
-
+python3 -m voila \
+	--enable_nbextensions=True \
+	--autoreload=True \
+	--no-browser \
+	--MappingKernelManager.cull_interval=60 \
+	--MappingKernelManager.cull_idle_timeout=120
 
 
 ##############################################################################
