@@ -189,3 +189,4 @@ CMD ["sh", "-c", "./Slicer/bin/PythonSlicer -m jupyter notebook --port=$JUPYTERP
 
  #     org.label-schema.vcs-url=$VCS_URL \
  #     org.label-schema.schema-version="1.0"
+ 
