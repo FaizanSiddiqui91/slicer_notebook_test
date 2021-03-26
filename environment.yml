@@ -1,6 +1,7 @@
+name: voila
 channels:
   - conda-forge
 dependencies:
   - appmode
-  - voila
+  - voila=0.2.6
   - numpy
