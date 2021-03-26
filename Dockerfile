@@ -140,7 +140,7 @@ RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify
 
 #EOF
 
-python3 -m voila \
+RUN python3 -m voila \
 	--enable_nbextensions=True \
 	--autoreload=True \
 	--no-browser \
