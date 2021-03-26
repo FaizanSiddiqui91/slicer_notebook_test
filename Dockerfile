@@ -138,6 +138,9 @@ RUN /home/sliceruser/Slicer/bin/PythonSlicer -m pip install --upgrade websockify
 ################################################################################
 # Install Slicer extensions app mode
 
+#
+#
+#
 #   This Dockerfile is mainly meant for developing and testing:
 #     1. docker build --tag appmode ./
 #     2. docker run --init -ti -p127.0.0.1:8888:8888 appmode
@@ -187,6 +190,11 @@ RUN pip3 install .                                           && \
 
 # Launch Notebook server
 EXPOSE 8888
+
+
+#EOF
+
+
 
 
 ##############################################################################
