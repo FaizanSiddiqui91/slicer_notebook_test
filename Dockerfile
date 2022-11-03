@@ -64,20 +64,26 @@ WORKDIR ${HOME}
 #ARG SLICER_DOWNLOAD_URL=http://slicer.kitware.com/midas3/api/rest?method=midas.bitstream.download&name=Slicer-4.13.0-2020-12-20-linux-amd64.tar.gz&checksum=eeb9ba596f3d5ff20265e7d9de9392fe
 
 
-#ARG SLICER_ARCHIVE=Slicer-4.11.20210226-linux-amd64
-#ARG SLICER_DOWNLOAD_URL=https://download.slicer.org/bitstream/60add706ae4540bf6a89bf98
+# Use local package:
+#ADD $SLICER_ARCHIVE.tar.gz ${HOME}/
 
-ARG SLICER_ARCHIVE=Slicer-4.13.0-2021-10-06-linux-amd64
-ARG SLICER_DOWNLOAD_URL=https://download.slicer.org/bitstream/615e75f7342a877cb3ccd8fa/download
+# Download package:
+#RUN curl -OJL "$SLICER_DOWNLOAD_URL" && \
+#    tar xzf $SLICER_ARCHIVE.tar.gz && \
+#    rm $SLICER_ARCHIVE.tar.gz && \
+#    mv $SLICER_ARCHIVE Slicer
+
+# Download and unpack Slicer
+
+# Current preview release (Slicer-5.0.3, 2022-07-08, rev30893)
+ARG SLICER_DOWNLOAD_URL=https://download.slicer.org/bitstream/62cc52d2aa08d161a31c1af0
 
 # Use local package:
 #ADD $SLICER_ARCHIVE.tar.gz ${HOME}/
 
 # Download package:
-RUN curl -OJL "$SLICER_DOWNLOAD_URL" && \
-    tar xzf $SLICER_ARCHIVE.tar.gz && \
-    rm $SLICER_ARCHIVE.tar.gz && \
-    mv $SLICER_ARCHIVE Slicer
+RUN curl -JL "$SLICER_DOWNLOAD_URL" | tar xz -C /tmp && mv /tmp/Slicer* Slicer
+
 
 ################################################################################
 # these go after installs to avoid trivial invalidation
